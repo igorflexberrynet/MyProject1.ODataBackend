@@ -1,0 +1,879 @@
+﻿
+
+
+
+
+CREATE TABLE Employee (
+
+ primaryKey UUID NOT NULL,
+
+ Surname VARCHAR(255) NOT NULL,
+
+ Name VARCHAR(255) NOT NULL,
+
+ Patronymic VARCHAR(255) NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE EquipmentModel (
+
+ primaryKey UUID NOT NULL,
+
+ Name VARCHAR(255) NOT NULL,
+
+ Manufacturer UUID NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE TypeOfEquipment (
+
+ primaryKey UUID NOT NULL,
+
+ Name VARCHAR(255) NOT NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE MaintenancePlan (
+
+ primaryKey UUID NOT NULL,
+
+ StartDate TIMESTAMP(3) NULL,
+
+ EndDate TIMESTAMP(3) NULL,
+
+ Equipment UUID NOT NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE PurposeOfTheMaintenanceModel (
+
+ primaryKey UUID NOT NULL,
+
+ EquipmentModel UUID NOT NULL,
+
+ MaintenanceProgram UUID NOT NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE FactOperationOfTheMaintenance (
+
+ primaryKey UUID NOT NULL,
+
+ ExecutionDate TIMESTAMP(3) NOT NULL,
+
+ Successfully BOOLEAN NOT NULL,
+
+ ScheduledMaintenanceOperation UUID NULL,
+
+ MaintenanceOperation UUID NOT NULL,
+
+ FactOfTheMaintenance UUID NOT NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE FactOfTheMaintenance (
+
+ primaryKey UUID NOT NULL,
+
+ StartDate TIMESTAMP(3) NULL,
+
+ EndDate TIMESTAMP(3) NULL,
+
+ ScanProtocol VARCHAR(255) NULL,
+
+ MaintenancePlan UUID NULL,
+
+ Equipment UUID NOT NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE Equipment (
+
+ primaryKey UUID NOT NULL,
+
+ Name VARCHAR(255) NULL,
+
+ ProductionDate TIMESTAMP(3) NULL,
+
+ DateOfCommissioning TIMESTAMP(3) NULL,
+
+ WarrantyPeriod TIMESTAMP(3) NULL,
+
+ OperatingTime INT NULL,
+
+ RunDate TIMESTAMP(3) NULL,
+
+ Description VARCHAR(255) NULL,
+
+ Accountable UUID NOT NULL,
+
+ SupplyContract UUID NULL,
+
+ Model UUID NOT NULL,
+
+ Location UUID NOT NULL,
+
+ Status UUID NOT NULL,
+
+ Type UUID NOT NULL,
+
+ ServiceContract UUID NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE Organization (
+
+ primaryKey UUID NOT NULL,
+
+ Name VARCHAR(255) NOT NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE MaintenanceProgram (
+
+ primaryKey UUID NOT NULL,
+
+ Name VARCHAR(255) NOT NULL,
+
+ Periodicity UUID NOT NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE Location (
+
+ primaryKey UUID NOT NULL,
+
+ Name VARCHAR(255) NOT NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE StatusOfTheEquipment (
+
+ primaryKey UUID NOT NULL,
+
+ Name VARCHAR(255) NOT NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE MaintenanceOperation (
+
+ primaryKey UUID NOT NULL,
+
+ Name VARCHAR(255) NOT NULL,
+
+ MaintenanceProgram UUID NOT NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE Periodicity (
+
+ primaryKey UUID NOT NULL,
+
+ Name VARCHAR(255) NOT NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE ScheduledMaintenanceOperation (
+
+ primaryKey UUID NOT NULL,
+
+ ExecutionDate TIMESTAMP(3) NOT NULL,
+
+ MaintenanceOperation UUID NOT NULL,
+
+ MaintenancePlan UUID NOT NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE Contract (
+
+ primaryKey UUID NOT NULL,
+
+ Number VARCHAR(255) NULL,
+
+ Date TIMESTAMP(3) NOT NULL,
+
+ ValidityPeriod TIMESTAMP(3) NULL,
+
+ Buyer UUID NOT NULL,
+
+ Seller UUID NOT NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE DocumentToTheModel (
+
+ primaryKey UUID NOT NULL,
+
+ Name VARCHAR(255) NOT NULL,
+
+ FileReference VARCHAR(255) NOT NULL,
+
+ EquipmentModel UUID NOT NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE STORMNETLOCKDATA (
+
+ LockKey VARCHAR(300) NOT NULL,
+
+ UserName VARCHAR(300) NOT NULL,
+
+ LockDate TIMESTAMP(3) NULL,
+
+ PRIMARY KEY (LockKey));
+
+
+
+CREATE TABLE STORMSETTINGS (
+
+ primaryKey UUID NOT NULL,
+
+ Module VARCHAR(1000) NULL,
+
+ Name VARCHAR(255) NULL,
+
+ Value TEXT NULL,
+
+ "User" VARCHAR(255) NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE STORMAdvLimit (
+
+ primaryKey UUID NOT NULL,
+
+ "User" VARCHAR(255) NULL,
+
+ Published BOOLEAN NULL,
+
+ Module VARCHAR(255) NULL,
+
+ Name VARCHAR(255) NULL,
+
+ Value TEXT NULL,
+
+ HotKeyData INT NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE STORMFILTERSETTING (
+
+ primaryKey UUID NOT NULL,
+
+ Name VARCHAR(255) NOT NULL,
+
+ DataObjectView VARCHAR(255) NOT NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE STORMWEBSEARCH (
+
+ primaryKey UUID NOT NULL,
+
+ Name VARCHAR(255) NOT NULL,
+
+ "Order" INT NOT NULL,
+
+ PresentView VARCHAR(255) NOT NULL,
+
+ DetailedView VARCHAR(255) NOT NULL,
+
+ FilterSetting_m0 UUID NOT NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE STORMFILTERDETAIL (
+
+ primaryKey UUID NOT NULL,
+
+ Caption VARCHAR(255) NOT NULL,
+
+ DataObjectView VARCHAR(255) NOT NULL,
+
+ ConnectMasterProp VARCHAR(255) NOT NULL,
+
+ OwnerConnectProp VARCHAR(255) NULL,
+
+ FilterSetting_m0 UUID NOT NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE STORMFILTERLOOKUP (
+
+ primaryKey UUID NOT NULL,
+
+ DataObjectType VARCHAR(255) NOT NULL,
+
+ Container VARCHAR(255) NULL,
+
+ ContainerTag VARCHAR(255) NULL,
+
+ FieldsToView VARCHAR(255) NULL,
+
+ FilterSetting_m0 UUID NOT NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE UserSetting (
+
+ primaryKey UUID NOT NULL,
+
+ AppName VARCHAR(256) NULL,
+
+ UserName VARCHAR(512) NULL,
+
+ UserGuid UUID NULL,
+
+ ModuleName VARCHAR(1024) NULL,
+
+ ModuleGuid UUID NULL,
+
+ SettName VARCHAR(256) NULL,
+
+ SettGuid UUID NULL,
+
+ SettLastAccessTime TIMESTAMP(3) NULL,
+
+ StrVal VARCHAR(256) NULL,
+
+ TxtVal TEXT NULL,
+
+ IntVal INT NULL,
+
+ BoolVal BOOLEAN NULL,
+
+ GuidVal UUID NULL,
+
+ DecimalVal DECIMAL(20,10) NULL,
+
+ DateTimeVal TIMESTAMP(3) NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE ApplicationLog (
+
+ primaryKey UUID NOT NULL,
+
+ Category VARCHAR(64) NULL,
+
+ EventId INT NULL,
+
+ Priority INT NULL,
+
+ Severity VARCHAR(32) NULL,
+
+ Title VARCHAR(256) NULL,
+
+ Timestamp TIMESTAMP(3) NULL,
+
+ MachineName VARCHAR(32) NULL,
+
+ AppDomainName VARCHAR(512) NULL,
+
+ ProcessId VARCHAR(256) NULL,
+
+ ProcessName VARCHAR(512) NULL,
+
+ ThreadName VARCHAR(512) NULL,
+
+ Win32ThreadId VARCHAR(128) NULL,
+
+ Message VARCHAR(2500) NULL,
+
+ FormattedMessage TEXT NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE STORMAuObjType (
+
+ primaryKey UUID NOT NULL,
+
+ Name VARCHAR(255) NOT NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE STORMAuEntity (
+
+ primaryKey UUID NOT NULL,
+
+ ObjectPrimaryKey VARCHAR(38) NOT NULL,
+
+ OperationTime TIMESTAMP(3) NOT NULL,
+
+ OperationType VARCHAR(100) NOT NULL,
+
+ ExecutionResult VARCHAR(12) NOT NULL,
+
+ Source VARCHAR(255) NOT NULL,
+
+ SerializedField TEXT NULL,
+
+ User_m0 UUID NOT NULL,
+
+ ObjectType_m0 UUID NOT NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE STORMAuField (
+
+ primaryKey UUID NOT NULL,
+
+ Field VARCHAR(100) NOT NULL,
+
+ OldValue TEXT NULL,
+
+ NewValue TEXT NULL,
+
+ MainChange_m0 UUID NULL,
+
+ AuditEntity_m0 UUID NOT NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE STORMAG (
+
+ primaryKey UUID NOT NULL,
+
+ Name VARCHAR(80) NOT NULL,
+
+ Login VARCHAR(50) NULL,
+
+ Pwd VARCHAR(50) NULL,
+
+ IsUser BOOLEAN NOT NULL,
+
+ IsGroup BOOLEAN NOT NULL,
+
+ IsRole BOOLEAN NOT NULL,
+
+ ConnString VARCHAR(255) NULL,
+
+ Enabled BOOLEAN NULL,
+
+ Email VARCHAR(80) NULL,
+
+ Comment VARCHAR NULL,
+
+ CreateTime TIMESTAMP(3) NULL,
+
+ Creator VARCHAR(255) NULL,
+
+ EditTime TIMESTAMP(3) NULL,
+
+ Editor VARCHAR(255) NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE STORMLG (
+
+ primaryKey UUID NOT NULL,
+
+ Group_m0 UUID NOT NULL,
+
+ User_m0 UUID NOT NULL,
+
+ CreateTime TIMESTAMP(3) NULL,
+
+ Creator VARCHAR(255) NULL,
+
+ EditTime TIMESTAMP(3) NULL,
+
+ Editor VARCHAR(255) NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE STORMI (
+
+ primaryKey UUID NOT NULL,
+
+ User_m0 UUID NOT NULL,
+
+ Agent_m0 UUID NOT NULL,
+
+ CreateTime TIMESTAMP(3) NULL,
+
+ Creator VARCHAR(255) NULL,
+
+ EditTime TIMESTAMP(3) NULL,
+
+ Editor VARCHAR(255) NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE Session (
+
+ primaryKey UUID NOT NULL,
+
+ UserKey UUID NULL,
+
+ StartedAt TIMESTAMP(3) NULL,
+
+ LastAccess TIMESTAMP(3) NULL,
+
+ Closed BOOLEAN NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE STORMS (
+
+ primaryKey UUID NOT NULL,
+
+ Name VARCHAR(100) NOT NULL,
+
+ Type VARCHAR(100) NULL,
+
+ IsAttribute BOOLEAN NOT NULL,
+
+ IsOperation BOOLEAN NOT NULL,
+
+ IsView BOOLEAN NOT NULL,
+
+ IsClass BOOLEAN NOT NULL,
+
+ SharedOper BOOLEAN NULL,
+
+ CreateTime TIMESTAMP(3) NULL,
+
+ Creator VARCHAR(255) NULL,
+
+ EditTime TIMESTAMP(3) NULL,
+
+ Editor VARCHAR(255) NULL,
+
+ Comment VARCHAR NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE STORMP (
+
+ primaryKey UUID NOT NULL,
+
+ Subject_m0 UUID NOT NULL,
+
+ Agent_m0 UUID NOT NULL,
+
+ CreateTime TIMESTAMP(3) NULL,
+
+ Creator VARCHAR(255) NULL,
+
+ EditTime TIMESTAMP(3) NULL,
+
+ Editor VARCHAR(255) NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE STORMF (
+
+ primaryKey UUID NOT NULL,
+
+ FilterText TEXT NULL,
+
+ Name VARCHAR(255) NULL,
+
+ FilterTypeNView VARCHAR(255) NULL,
+
+ Subject_m0 UUID NULL,
+
+ CreateTime TIMESTAMP(3) NULL,
+
+ Creator VARCHAR(255) NULL,
+
+ EditTime TIMESTAMP(3) NULL,
+
+ Editor VARCHAR(255) NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE STORMAC (
+
+ primaryKey UUID NOT NULL,
+
+ TypeAccess VARCHAR(7) NULL,
+
+ Filter_m0 UUID NULL,
+
+ Permition_m0 UUID NOT NULL,
+
+ CreateTime TIMESTAMP(3) NULL,
+
+ Creator VARCHAR(255) NULL,
+
+ EditTime TIMESTAMP(3) NULL,
+
+ Editor VARCHAR(255) NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE STORMLO (
+
+ primaryKey UUID NOT NULL,
+
+ Class_m0 UUID NOT NULL,
+
+ Operation_m0 UUID NOT NULL,
+
+ CreateTime TIMESTAMP(3) NULL,
+
+ Creator VARCHAR(255) NULL,
+
+ EditTime TIMESTAMP(3) NULL,
+
+ Editor VARCHAR(255) NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE STORMLA (
+
+ primaryKey UUID NOT NULL,
+
+ View_m0 UUID NOT NULL,
+
+ Attribute_m0 UUID NOT NULL,
+
+ CreateTime TIMESTAMP(3) NULL,
+
+ Creator VARCHAR(255) NULL,
+
+ EditTime TIMESTAMP(3) NULL,
+
+ Editor VARCHAR(255) NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE STORMLV (
+
+ primaryKey UUID NOT NULL,
+
+ Class_m0 UUID NOT NULL,
+
+ View_m0 UUID NOT NULL,
+
+ CreateTime TIMESTAMP(3) NULL,
+
+ Creator VARCHAR(255) NULL,
+
+ EditTime TIMESTAMP(3) NULL,
+
+ Editor VARCHAR(255) NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+CREATE TABLE STORMLR (
+
+ primaryKey UUID NOT NULL,
+
+ StartDate TIMESTAMP(3) NULL,
+
+ EndDate TIMESTAMP(3) NULL,
+
+ Agent_m0 UUID NOT NULL,
+
+ Role_m0 UUID NOT NULL,
+
+ CreateTime TIMESTAMP(3) NULL,
+
+ Creator VARCHAR(255) NULL,
+
+ EditTime TIMESTAMP(3) NULL,
+
+ Editor VARCHAR(255) NULL,
+
+ PRIMARY KEY (primaryKey));
+
+
+
+
+ ALTER TABLE EquipmentModel ADD CONSTRAINT FK312f08e20bd442dab5a9e2966609dd62 FOREIGN KEY (Manufacturer) REFERENCES Organization; 
+CREATE INDEX Index02600d9ee0feb79c5bce9d96c63fd8a3a218421f on EquipmentModel (Manufacturer); 
+
+ ALTER TABLE MaintenancePlan ADD CONSTRAINT FKe3f69e7bc0114ed28839d133c765e10a FOREIGN KEY (Equipment) REFERENCES Equipment; 
+CREATE INDEX Index6e489925928d1da40cff9a9d9c42ecd37b476a84 on MaintenancePlan (Equipment); 
+
+ ALTER TABLE PurposeOfTheMaintenanceModel ADD CONSTRAINT FK100b7b0f847c4f4a82d58586c1f7d499 FOREIGN KEY (EquipmentModel) REFERENCES EquipmentModel; 
+CREATE INDEX Indexa02776dbf5cd4182db1bf030bcf46249b08acf5e on PurposeOfTheMaintenanceModel (EquipmentModel); 
+
+ ALTER TABLE PurposeOfTheMaintenanceModel ADD CONSTRAINT FKa189725550694ddf896a95d68f4be302 FOREIGN KEY (MaintenanceProgram) REFERENCES MaintenanceProgram; 
+CREATE INDEX Index69db83c12de9a03166f4cbe631098da84a960ce8 on PurposeOfTheMaintenanceModel (MaintenanceProgram); 
+
+ ALTER TABLE FactOperationOfTheMaintenance ADD CONSTRAINT FKb481dbdbd0254b41a429d3ec70cdec22 FOREIGN KEY (ScheduledMaintenanceOperation) REFERENCES ScheduledMaintenanceOperation; 
+CREATE INDEX Index37651f779d8083935a4d9d39da4693292259a847 on FactOperationOfTheMaintenance (ScheduledMaintenanceOperation); 
+
+ ALTER TABLE FactOperationOfTheMaintenance ADD CONSTRAINT FK4d517db886634cefb282f0d1a817d900 FOREIGN KEY (MaintenanceOperation) REFERENCES MaintenanceOperation; 
+CREATE INDEX Index3f5b894cc5b28a9f50ce8d969e49ac6ee8c741fb on FactOperationOfTheMaintenance (MaintenanceOperation); 
+
+ ALTER TABLE FactOperationOfTheMaintenance ADD CONSTRAINT FK98d03326d4a84294be06c17aa40546e5 FOREIGN KEY (FactOfTheMaintenance) REFERENCES FactOfTheMaintenance; 
+CREATE INDEX Index1e266b89a9eb6af39bd7b277f453388c2808ebdb on FactOperationOfTheMaintenance (FactOfTheMaintenance); 
+
+ ALTER TABLE FactOfTheMaintenance ADD CONSTRAINT FK2de34e8794244c7895e042f17cae1f81 FOREIGN KEY (MaintenancePlan) REFERENCES MaintenancePlan; 
+CREATE INDEX Index66994478454a14d64a348363a7a876c7c73409c8 on FactOfTheMaintenance (MaintenancePlan); 
+
+ ALTER TABLE FactOfTheMaintenance ADD CONSTRAINT FKde69a31d4abd4294bb8f170d1df035ff FOREIGN KEY (Equipment) REFERENCES Equipment; 
+CREATE INDEX Index352ec639eee19debce7b0722f07c6f02e4e3ccce on FactOfTheMaintenance (Equipment); 
+
+ ALTER TABLE Equipment ADD CONSTRAINT FKb58d5ff7702d4f4eb517d74d6e3a93c5 FOREIGN KEY (Accountable) REFERENCES Employee; 
+CREATE INDEX Indexf67a682f07ca81560da5ee0d5943532a33433e96 on Equipment (Accountable); 
+
+ ALTER TABLE Equipment ADD CONSTRAINT FK8a5cd5d0e3304ff6b5569d4cfcb59dd1 FOREIGN KEY (SupplyContract) REFERENCES Contract; 
+CREATE INDEX Indexa351395af89321f13559acdd3abd5bde230d0b70 on Equipment (SupplyContract); 
+
+ ALTER TABLE Equipment ADD CONSTRAINT FK1aee4faa933145d4b5574cab986939df FOREIGN KEY (Model) REFERENCES EquipmentModel; 
+CREATE INDEX Index03991bd8ebba76e1cf23ed47a835a28db6a52477 on Equipment (Model); 
+
+ ALTER TABLE Equipment ADD CONSTRAINT FKccc7753e481e4850972fdb60b8dbd01f FOREIGN KEY (Location) REFERENCES Location; 
+CREATE INDEX Indexeef86b5339321ab52b76559632f0a931b8e6bbe7 on Equipment (Location); 
+
+ ALTER TABLE Equipment ADD CONSTRAINT FKdf911e82ddcc4d7ebef7ff2f99fef64e FOREIGN KEY (Status) REFERENCES StatusOfTheEquipment; 
+CREATE INDEX Index15a4d7da82500479dcd109ad7a8794224084d11c on Equipment (Status); 
+
+ ALTER TABLE Equipment ADD CONSTRAINT FKb48f0061c44145ba862704c1167d3cef FOREIGN KEY (Type) REFERENCES TypeOfEquipment; 
+CREATE INDEX Index8cdd30894f972ce5484deaf5833eb105bf87a06c on Equipment (Type); 
+
+ ALTER TABLE Equipment ADD CONSTRAINT FK689189ac594c4975a0829d9649b9e2ff FOREIGN KEY (ServiceContract) REFERENCES Contract; 
+CREATE INDEX Index20e1eb4d94991e62dd2497866f61b570a681a287 on Equipment (ServiceContract); 
+
+ ALTER TABLE MaintenanceProgram ADD CONSTRAINT FKfb1aaef30c7145ab93c5a50ead7b050e FOREIGN KEY (Periodicity) REFERENCES Periodicity; 
+CREATE INDEX Index663a4c9fa357d7a0ac73b97fe74eb6d5caf4337e on MaintenanceProgram (Periodicity); 
+
+ ALTER TABLE MaintenanceOperation ADD CONSTRAINT FKb41f42e9fd134e779966cc2d72b84567 FOREIGN KEY (MaintenanceProgram) REFERENCES MaintenanceProgram; 
+CREATE INDEX Indexa178cc1cf0268a2ce81821df66817b22f180bfb9 on MaintenanceOperation (MaintenanceProgram); 
+
+ ALTER TABLE ScheduledMaintenanceOperation ADD CONSTRAINT FK4cbfadca3bf34e5ba061fe4494f1254c FOREIGN KEY (MaintenanceOperation) REFERENCES MaintenanceOperation; 
+CREATE INDEX Index793edf9bd702ef3a4fcc24cf8406bfe17540eace on ScheduledMaintenanceOperation (MaintenanceOperation); 
+
+ ALTER TABLE ScheduledMaintenanceOperation ADD CONSTRAINT FKb807b84b3b5840d08a5f6677dc3fad65 FOREIGN KEY (MaintenancePlan) REFERENCES MaintenancePlan; 
+CREATE INDEX Indexaa21d3622282388d4f9407d7b16e7a0982473864 on ScheduledMaintenanceOperation (MaintenancePlan); 
+
+ ALTER TABLE Contract ADD CONSTRAINT FKac634e5de0b143dbb5ce1ee89e1b52d9 FOREIGN KEY (Buyer) REFERENCES Organization; 
+CREATE INDEX Index302cf643a160ea8dcfcf66c8705ff9e7e9909e05 on Contract (Buyer); 
+
+ ALTER TABLE Contract ADD CONSTRAINT FK80ef1f85f79d4d77bcda45786ae23452 FOREIGN KEY (Seller) REFERENCES Organization; 
+CREATE INDEX Index05ecbae3f2cb4443a7db1a8566e1487c9e33a706 on Contract (Seller); 
+
+ ALTER TABLE DocumentToTheModel ADD CONSTRAINT FK133e615141b64525bc52e70c6d83bfe1 FOREIGN KEY (EquipmentModel) REFERENCES EquipmentModel; 
+CREATE INDEX Indexea9285761dbe3db25b8a38118c5a196fdbaa687c on DocumentToTheModel (EquipmentModel); 
+
+ ALTER TABLE STORMWEBSEARCH ADD CONSTRAINT FKb5a4e1271da6421581ec503529a3e7f5 FOREIGN KEY (FilterSetting_m0) REFERENCES STORMFILTERSETTING; 
+
+ ALTER TABLE STORMFILTERDETAIL ADD CONSTRAINT FK2bf4fe7917104ce380721b0f0cc62b46 FOREIGN KEY (FilterSetting_m0) REFERENCES STORMFILTERSETTING; 
+
+ ALTER TABLE STORMFILTERLOOKUP ADD CONSTRAINT FK8a8bb04deb4445bc8e305e0f5aa30a35 FOREIGN KEY (FilterSetting_m0) REFERENCES STORMFILTERSETTING; 
+
+ ALTER TABLE STORMAuEntity ADD CONSTRAINT FKc43429aa55a34be0a44c82a35ee00512 FOREIGN KEY (ObjectType_m0) REFERENCES STORMAuObjType; 
+
+ ALTER TABLE STORMAuField ADD CONSTRAINT FKfdedaa18282e4c3ea3902ad3e8a3694f FOREIGN KEY (MainChange_m0) REFERENCES STORMAuField; 
+
+ ALTER TABLE STORMAuField ADD CONSTRAINT FKa0d5dc22659346cda095fc85f72b8412 FOREIGN KEY (AuditEntity_m0) REFERENCES STORMAuEntity; 
+
+ ALTER TABLE STORMLG ADD CONSTRAINT FKca3f7878639846eca9f47bd732d90ba6 FOREIGN KEY (Group_m0) REFERENCES STORMAG; 
+
+ ALTER TABLE STORMLG ADD CONSTRAINT FK5404637f81134e4daa58247bc9a12b9e FOREIGN KEY (User_m0) REFERENCES STORMAG; 
+
+ ALTER TABLE STORMI ADD CONSTRAINT FKeb4fc634cea042a6a7b38779d833d21e FOREIGN KEY (User_m0) REFERENCES STORMAG; 
+
+ ALTER TABLE STORMI ADD CONSTRAINT FKb72b94d9db7045338d74a74495404c8c FOREIGN KEY (Agent_m0) REFERENCES STORMAG; 
+
+ ALTER TABLE STORMP ADD CONSTRAINT FK7879c2463e1a47f1ad76d782302e5837 FOREIGN KEY (Subject_m0) REFERENCES STORMS; 
+
+ ALTER TABLE STORMP ADD CONSTRAINT FK876643e8533b4952946f69e539eff69e FOREIGN KEY (Agent_m0) REFERENCES STORMAG; 
+
+ ALTER TABLE STORMF ADD CONSTRAINT FKf4c13514a4cc407b97531d2779c7437a FOREIGN KEY (Subject_m0) REFERENCES STORMS; 
+
+ ALTER TABLE STORMAC ADD CONSTRAINT FKc9fb4888c9154d6d97500965df9d9d8e FOREIGN KEY (Filter_m0) REFERENCES STORMF; 
+
+ ALTER TABLE STORMAC ADD CONSTRAINT FKdd619e91cbb44536a98cf333059040c6 FOREIGN KEY (Permition_m0) REFERENCES STORMP; 
+
+ ALTER TABLE STORMLO ADD CONSTRAINT FK30da117103c1439db008dbeb15025d2a FOREIGN KEY (Class_m0) REFERENCES STORMS; 
+
+ ALTER TABLE STORMLO ADD CONSTRAINT FK62e999dcb9ac4eddab2d3ddf2e5b4d0d FOREIGN KEY (Operation_m0) REFERENCES STORMS; 
+
+ ALTER TABLE STORMLA ADD CONSTRAINT FK11b8b6f1d6d44649a3f19f0633dab978 FOREIGN KEY (View_m0) REFERENCES STORMS; 
+
+ ALTER TABLE STORMLA ADD CONSTRAINT FK72eb7b68ac2e45cf8fd474b0e7c4ba43 FOREIGN KEY (Attribute_m0) REFERENCES STORMS; 
+
+ ALTER TABLE STORMLV ADD CONSTRAINT FK6cff18557c3f440baad54f97bfbf9c05 FOREIGN KEY (Class_m0) REFERENCES STORMS; 
+
+ ALTER TABLE STORMLV ADD CONSTRAINT FK19a358f3f0c346a983b67e60a95ddd03 FOREIGN KEY (View_m0) REFERENCES STORMS; 
+
+ ALTER TABLE STORMLR ADD CONSTRAINT FK9614656014214889aadb8df0ab132c78 FOREIGN KEY (Agent_m0) REFERENCES STORMAG; 
+
+ ALTER TABLE STORMLR ADD CONSTRAINT FKf4eeb2ff5f2a406e86f6d703f1d8c3a6 FOREIGN KEY (Role_m0) REFERENCES STORMAG; 
+
